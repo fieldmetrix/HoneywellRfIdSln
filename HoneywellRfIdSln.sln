@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneywellRfid.Jbl", "HoneywellRfid.Jbl\HoneywellRfid.Jbl.csproj", "{3337EF83-26DA-4BCA-AADB-99514765D39A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{95D4C750-50F5-457A-8D97-BBD651C45CA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReworkedNative", "ReworkedNative", "{244A53AE-966E-44F8-9866-74E522ADA10B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93662948-DBA8-43C3-BC6A-F0286D4DB957}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HoneywellOriginal", "HoneywellOriginal", "{27A8A2A2-F9F5-44D6-A685-CB3D13D4401C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneywellRfId.Android", "Samples\HoneywellSample\HoneywellRfId.Android\HoneywellRfId.Android.csproj", "{53D1A6D6-477D-47B3-989E-110B49217F3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneywellRfidNative", "Samples\ReworkedNativeSample\HoneywellRfidNative\HoneywellRfidNative.csproj", "{A14B3C57-DB32-44B1-8E40-F07D07745997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneywellRfIdShared", "HoneywellRfIdShared\HoneywellRfIdShared.csproj", "{A65C7B37-E88F-4152-8C9B-37E744C1BE67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3337EF83-26DA-4BCA-AADB-99514765D39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3337EF83-26DA-4BCA-AADB-99514765D39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3337EF83-26DA-4BCA-AADB-99514765D39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3337EF83-26DA-4BCA-AADB-99514765D39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D1A6D6-477D-47B3-989E-110B49217F3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D1A6D6-477D-47B3-989E-110B49217F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D1A6D6-477D-47B3-989E-110B49217F3B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{53D1A6D6-477D-47B3-989E-110B49217F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D1A6D6-477D-47B3-989E-110B49217F3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D1A6D6-477D-47B3-989E-110B49217F3B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A14B3C57-DB32-44B1-8E40-F07D07745997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14B3C57-DB32-44B1-8E40-F07D07745997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14B3C57-DB32-44B1-8E40-F07D07745997}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A14B3C57-DB32-44B1-8E40-F07D07745997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14B3C57-DB32-44B1-8E40-F07D07745997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14B3C57-DB32-44B1-8E40-F07D07745997}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A65C7B37-E88F-4152-8C9B-37E744C1BE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A65C7B37-E88F-4152-8C9B-37E744C1BE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A65C7B37-E88F-4152-8C9B-37E744C1BE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A65C7B37-E88F-4152-8C9B-37E744C1BE67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{244A53AE-966E-44F8-9866-74E522ADA10B} = {95D4C750-50F5-457A-8D97-BBD651C45CA3}
+		{27A8A2A2-F9F5-44D6-A685-CB3D13D4401C} = {95D4C750-50F5-457A-8D97-BBD651C45CA3}
+		{53D1A6D6-477D-47B3-989E-110B49217F3B} = {27A8A2A2-F9F5-44D6-A685-CB3D13D4401C}
+		{A14B3C57-DB32-44B1-8E40-F07D07745997} = {244A53AE-966E-44F8-9866-74E522ADA10B}
+		{A65C7B37-E88F-4152-8C9B-37E744C1BE67} = {93662948-DBA8-43C3-BC6A-F0286D4DB957}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B8192BD-BC3A-43AF-BDC1-96D0C8EA59A3}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+﻿<metadata>
+  <attr path="/api/package[@name='com.thingmagic']/class[@name='SerialReader.VersionNumber']/method[@name='compareTo' and count(parameter)=1 and parameter[1][@type='com.thingmagic.SerialReader.VersionNumber']]/parameter[1]" name="managedType">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice.rfid']/class[@name='Region']/method[@name='getName' and count(parameter)=0]" name="managedName">RegionName</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice.rfid']/class[@name='Gen2.LockType']/method[@name='getName' and count(parameter)=0]" name="managedName">LockTypeName</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice.rfid']/class[@name='TagAdditionData']/method[@name='getName' and count(parameter)=0]" name="managedName">TagAdditionalDataName</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice.rfid']/class[@name='Gen2.LockBank']/method[@name='getName' and count(parameter)=0]" name="managedName">LockBankName</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice']/interface[@name='EventListener']/method[@name='onRfidTriggered']/parameter[@name='p0']" name="name">triggered</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice']/interface[@name='EventListener']/method[@name='onTriggerModeSwitched']/parameter[@name='p0']" name="name">mode</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice']/interface[@name='EventListener']/method[@name='onReaderCreated']/parameter[@name='p0']" name="name">success</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice']/interface[@name='EventListener']/method[@name='onReaderCreated']/parameter[@name='p1']" name="name">reader</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice']/interface[@name='EventListener']/method[@name='onDeviceConnected']/parameter[@name='p0']" name="name">data</attr>
+  <attr path="/api/package[@name='com.honeywell.rfidservice']/interface[@name='EventListener']/method[@name='onDeviceDisconnected']/parameter[@name='p0']" name="name">data</attr>
+</metadata>

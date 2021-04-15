@@ -1,0 +1,18 @@
+<resources>
+  <string name="app_name">HoneywellRfidNative</string>
+  <string name="action_settings">Settings</string>
+  <string name="search">Search</string>
+  <string name="searching">Searching</string>
+  <string name="access_read_text">Create Reader</string>
+  <string name="bt_text_on">Open</string>
+  <string name="bt_text_off">Close</string>
+  <string name="tv_bluetooth">Bluetooth</string>
+  <string name="list_tv_text">Bluetooth List</string>
+  <string name="btn_search_text">@string/search</string>
+  <string name="tv_auto_connect">Auto Connect</string>
+  <string name="state_connected">Connected</string>
+  <string name="state_connecting">Connecting</string>
+  <string name="tv_rssi">Rssi:</string>
+  <string name="loading_text">Loading...</string>
+  <string name="bluetooth_not_connected">Bluetooth is not connected!</string>
+</resources>

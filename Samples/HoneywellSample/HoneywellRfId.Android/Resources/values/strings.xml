@@ -1,0 +1,111 @@
+<resources>
+
+  <string name="search">Search</string>
+  <string name="searching">Searching</string>
+
+  <string name="app_name">App1</string>
+    <string name="action_settings">Settings</string>
+
+  <string-array name="function_icons">
+    <item>@drawable/reader_bt</item>
+    <item>@drawable/reader_inventory</item>
+    
+  </string-array>
+
+  <string-array name="function_texts">
+    <item>@string/bluetooth_text</item>
+    <item>@string/inventory_tag_text</item>
+    <item>@string/write_lock_tag_text</item>
+    <item>@string/locate_tag_text</item>
+    <item>@string/settings_text</item>
+    <item>@string/about_text</item>
+  </string-array>
+
+  <!-- Main -->
+  <string name="bluetooth_text">Bluetooth</string>
+  <string name="inventory_tag_text">Inventory</string>
+  <string name="write_lock_tag_text">Write/Lock Tag</string>
+  <string name="locate_tag_text">Locate Tag</string>
+  <string name="settings_text">Settings</string>
+  <string name="about_text">About</string>
+  <string name="bluetooth_not_connected">Bluetooth is not connected!</string>
+  <string name="dev_not_certified">Device not certified!</string>
+  <string name="toast_back_to_exit">Press again to exit!</string>
+  <string name="request_permission_title">Permissions have been disabled, please manually grant!</string>
+  <string name="request_permission_positive_text">Ok</string>
+  <string name="request_permission_negative_text">Cancel</string>
+
+  <string-array name="coname_texts">
+    <item>Num</item>
+    <item>EPC ID</item>
+    <item>Cnt</item>
+    <item>Ant</item>
+    <item>Prot</item>
+    <item>RSSI</item>
+    <item>Freq</item>
+    <item>Extra</item>
+    <item>TimeStamp</item>
+  </string-array>
+
+  <string name="toast_error1">Bluetooth is not connected!</string>
+  <string name="toast_error2">Reader is null!</string>
+  <string name="toast_error3">Current Mode is not RFID mode!</string>
+
+  <string name="access_read_text">Create Reader</string>
+  <string name="bt_text_on">Open</string>
+  <string name="bt_text_off">Close</string>
+  <string name="tv_bluetooth">Bluetooth</string>
+  <string name="list_tv_text">Bluetooth List</string>
+  <string name="btn_search_text">@string/search</string>
+  <string name="finding_ble_service">Finding BLE Services</string>
+  <string name="creating_reader">Creating Reader</string>
+  <string name="toast_create_reader_failed">Failed to Create Reader!</string>
+  <string name="toast_create_reader_successfully">Creat Reader Successfully!</string>
+  <string name="loading_text">Loading...</string>
+  <string name="barcode_way">Barcode Way</string>
+  <string name="barcode_way_intro">Press Scan Button to parse BLE mac address from Barcode.</string>
+  <string name="ble_fota_update">Bluetooth Fota Update</string>
+  <string name="ble_fota_update_try_again">Seems the device did not upgrade Bluetooth firmware successfully before.\n\nWant to upgrade again?\n</string>
+  <string name="rfid_firmware_update">RFID firmware Update</string>
+  <string name="tv_auto_connect">Auto Connect</string>
+  <string name="state_connected">Connected</string>
+  <string name="state_connecting">Connecting</string>
+  <string name="toast_bt_is_closed">Bluetooth is not turned on!</string>
+  <string name="toast_autoconnect_should_close">AutoConnect should be turned off firstly!</string>
+  <string name="tv_rssi">Rssi:</string>
+  <string name="dialog_title_disconnect">Disconnect Bluetooth?</string>
+  <string name="dialog_text_yes">Yes</string>
+  <string name="dialog_text_no">No</string>
+
+  <string name="toast_input_error1">Input only numbers!</string>
+  <string name="toast_input_error2">Value range should between 50 and 2000!</string>
+  <string name="toast_input_error3">Value range should between 0 and 2000!</string>
+  <string name="sound_switch_title">RFID scanning sound(PDA)</string>
+  <string name="sound_switch_summary">On/Off</string>
+  <string name="sound_switch_rfid_title">RFID scanning sound(RFID)</string>
+  <string name="sound_switch_rfid_summary">On/Off</string>
+  <string name="toast_get_temp_failed">Get Temperature failed:</string>
+  <string name="toast_get_temp_successfully">Get Temperature Successfully!</string>
+  <string name="toast_get_module_version_failed">Get Module version failed:</string>
+  <string name="toast_battery_charge_cycle_reminder">Reminder, The battery has been used for a long time, and it is recommended to replace the battery for better performance.</string>
+
+  <string name="info_once_cnt">Once cnt</string>
+  <string name="info_once_num">Once num</string>
+  <string name="info_once_time">Once time</string>
+  <string name="info_total_cnt">Total cnt</string>
+  <string name="info_total_num">Total num</string>
+  <string name="info_total_time">Total time</string>
+  <string name="info_average_speed">Average speed</string>
+  <string name="info_real_speed">Real speed(pcs/s)</string>
+
+  <!--ReaderInventory-->
+  <string name="start_inventory_tag">Start</string>
+  <string name="stop_inventory_tag">Stop</string>
+  <string name="clear_tag">Clear</string>
+  <string name="inventory_result_info">once_cnt:%1$d\t\t\tonce_num:%2$d\t\t\tonce_time:%3$dms</string>
+  <string name="inventory_fast_result_info">realtime_speed:%1$d pcs/s(Record every 1 secs)</string>
+  <string name="inventory_result_extra_info">total_cnt:%1$d\t\t\ttotal_num:%2$d\t\t\ttotal_time:%3$dms\naverage_speed:%4$d pcs/s</string>
+  <string name="toast_temp_too_high">Battery temperature is too high, can\'t not perform a inventory.</string>
+
+
+</resources>
