@@ -5,17 +5,17 @@ namespace HoneywellRfidNative.Handlers
 {
     public class BtConnectionHandler : Handler
     {
-        private WeakReference<MainActivity> _ref;
+        private WeakReference<TestActivity2> _ref;
 
-        public BtConnectionHandler(MainActivity act)
+        public BtConnectionHandler(TestActivity2 act)
         {
-            _ref = new WeakReference<MainActivity>(act);
+            _ref = new WeakReference<TestActivity2>(act);
         }
 
         public override void HandleMessage(Message msg)
         {
             base.HandleMessage(msg);
-            MainActivity target;
+            TestActivity2 target;
             _ref.TryGetTarget(out target);
 
             if (target != null)
