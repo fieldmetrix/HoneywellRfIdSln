@@ -25,7 +25,7 @@ using static Android.Views.View;
 namespace HoneywellRfidNative
 {
 
-	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
 	public class TestActivity1 : AppCompatActivity
 	{
 

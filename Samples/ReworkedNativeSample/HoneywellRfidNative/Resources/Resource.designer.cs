@@ -6078,7 +6078,10 @@ namespace HoneywellRfidNative
 			public const int testactivity1 = 2131427390;
 			
 			// aapt resource value: 0x7F0B003F
-			public const int toolbar = 2131427391;
+			public const int testactivity2 = 2131427391;
+			
+			// aapt resource value: 0x7F0B0040
+			public const int toolbar = 2131427392;
 			
 			static Layout()
 			{

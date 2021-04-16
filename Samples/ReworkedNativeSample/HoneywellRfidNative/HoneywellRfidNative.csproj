@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RfIdReaderActivity.cs" />
     <Compile Include="TestActivity1.cs" />
+    <Compile Include="TestActivity2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -158,6 +159,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\testactivity1.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\testactivity2.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
