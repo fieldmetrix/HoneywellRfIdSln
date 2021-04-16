@@ -25,7 +25,7 @@ using static Android.Views.View;
 namespace HoneywellRfidNative
 {
 
-	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
+	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
 	public class TestActivity1 : AppCompatActivity
 	{
 
@@ -98,6 +98,57 @@ namespace HoneywellRfidNative
 			_receiver = new BtBroadcastReceiver();
 			RegisterReceiver(_receiver, new IntentFilter(BluetoothDevice.ActionFound));
 
+		}
+
+		public void HandleMessage(Android.OS.Message msg)
+		{
+			switch (msg.What)
+			{
+				case BleMsgConsts.MSG_FINDING_BLE_SERVICES:
+					//_progressDialog.SetTitle("Finding Devices");
+					//_progressDialog.Show();
+					break;
+				case BleMsgConsts.MSG_CREATING_READER:
+					//_progressDialog.SetTitle("Creating Reader");
+					//_progressDialog.Show();
+					break;
+				case BleMsgConsts.MSG_CREATE_READER_SUCCESSFULLY:
+					//_progressDialog.Dismiss();
+					Toast.MakeText(this, "Created Reader", ToastLength.Short).Show();
+					break;
+				case BleMsgConsts.MSG_CREATE_READER_FAILED:
+					//_progressDialog.Dismiss();
+					Toast.MakeText(this, "Reader Failed", ToastLength.Short).Show();
+					break;
+				case BleMsgConsts.MSG_BT_SCAN_TIMEOUT:
+					//SearchTimeout();
+					break;
+				case BleMsgConsts.MSG_ON_BLE_DEV_FOUND:
+					//int rssi = msg.Arg1;
+					//BluetoothDevice device = (BluetoothDevice)msg.Obj;
+
+					//if (!_bleScanDevices.Any(x => x.Address == device.Address))
+					//{
+					//	_bleScanDevices.Add(device);
+					//	_bleScanListAdapter.NotifyDataSetChanged();
+					//}
+
+					//_bleScanDevicesRssi[device.Address] = rssi;
+
+					//DateTime cur = DateTime.Now;
+
+					//var diffTime = cur - _prevListUpdateTime;
+
+					//if (diffTime.TotalMilliseconds > 250)
+					//{
+					//	_bleScanListAdapter.NotifyDataSetChanged();
+					//	_prevListUpdateTime = cur;
+					//}
+					break;
+				case BleMsgConsts.MSG_DEALY_CREATE_READER:
+					//_accessReadBtn.Enabled = true;
+					break;
+			}
 		}
 
 		private void _receiver_DeviceReceived(object sender, EventArgs e)
@@ -217,6 +268,8 @@ namespace HoneywellRfidNative
 			{
 				HoneywellDeviceHub.GetInstance().RfIdRdr = e.Reader;
 				//_connectionHandler.SendEmptyMessage(BleMsgConsts.MSG_CREATE_READER_SUCCESSFULLY);
+				Intent intent = new Intent(this, typeof(RfIdReaderActivity));
+				StartActivity(intent);
 			}
 		}
 
@@ -259,8 +312,6 @@ namespace HoneywellRfidNative
 				try
 				{
 					_rfidManager.CreateReader();
-					//Intent intent = new Intent(this, typeof(RfIdReaderActivity));
-					//StartActivity(intent);
 				}
 				catch (Exception ex)
 				{
