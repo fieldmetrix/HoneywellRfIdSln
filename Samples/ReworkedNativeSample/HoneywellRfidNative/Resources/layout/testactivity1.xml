@@ -4,6 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 	<Button
+		android:text="BT Scan"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:id="@+id/btnBTScan" />
+	<Button
 		android:text="Init"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

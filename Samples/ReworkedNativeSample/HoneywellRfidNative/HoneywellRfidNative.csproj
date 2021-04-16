@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Adapters\BluetoothDeviceListAdapter.cs" />
     <Compile Include="Adapters\RfidTagListAdapter.cs" />
+    <Compile Include="BluetoothDeviceReceiver.cs" />
     <Compile Include="Broadcast\BtReceiver.cs" />
     <Compile Include="Callbacks\BleScanCallBack.cs" />
     <Compile Include="Consts\BleMsgConsts.cs" />

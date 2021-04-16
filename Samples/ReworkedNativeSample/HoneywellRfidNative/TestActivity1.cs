@@ -21,7 +21,6 @@ using HoneywellRfidNative.Consts;
 using HoneywellRfidNative.Handlers;
 using HoneywellRfIdShared.Hub;
 using static Android.Views.View;
-using System.Threading;
 
 namespace HoneywellRfidNative
 {
@@ -30,39 +29,21 @@ namespace HoneywellRfidNative
 	public class TestActivity1 : AppCompatActivity
 	{
 
-		static string mac = "0C:23:69:19:5E:3D";
+		// IH25 - 1
+		static string mac1 = "0C:23:69:19:5E:3D";
+
+		// IH25 - 2
+		static string mac2 = "0C:23:69:19:6A:44";
+
 		static BluetoothDevice btRfidScannerDevice = null;
 
 		private Context _context;
 
-		public class BluetoothDeviceReceiver : BroadcastReceiver
-		{
-			public override void OnReceive(Context context, Intent intent)
-			{
-
-				var action = intent.Action;
-
-				// Get the device
-				var device = (BluetoothDevice)intent.GetParcelableExtra(BluetoothDevice.ExtraDevice);
-
-				if (action == BluetoothDevice.ActionFound && device != null)
-				{
-					if (device.Address == mac)
-					{
-						//if (device.BondState != Bond.Bonded)
-						//{
-						//	Console.WriteLine($"Found device with name: {device.Name} and MAC address: {device.Address}");
-						//	device.CreateBond();
-						//}
-						btRfidScannerDevice = device;
-					}
-				}
-			}
-		}
-
+		Button btnBTScan;
 		Button btnInit;
 		Button btnScanTags;
-		private BluetoothDeviceReceiver _receiver;
+		private BtReceiver _btReceiver;
+		private BtBroadcastReceiver _receiver;
 		private BluetoothAdapter _bluetoothAdapter = null;
 		private RfidManager _rfidManager;
 
@@ -78,30 +59,24 @@ namespace HoneywellRfidNative
 
 			base.OnCreate(savedInstanceState);
 
+			Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
 			SetContentView(Resource.Layout.testactivity1);
 
+			btnBTScan = FindViewById<Button>(Resource.Id.btnBTScan);
+			btnBTScan.Click += BtnBTScan_Click;
+
 			btnInit = FindViewById<Button>(Resource.Id.btnInit);
+			btnInit.Enabled = false;
 			btnInit.Click += BtnInit_Click;
 
 			btnScanTags = FindViewById<Button>(Resource.Id.btnScanTags);
+			btnScanTags.Enabled = false;
 			btnScanTags.Click += BtnScanTags_Click;
 
 			Init();
 
 			RequestDynamicPermissions();
-
-			// Register for broadcasts when a device is discovered
-			_receiver = new BluetoothDeviceReceiver();
-			//RegisterReceiver(_receiver, new IntentFilter(BluetoothDevice.ActionFound, BluetoothDevice.ActionBondStateChanged));
-			using (IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ActionFound))
-			{
-				intentFilter.AddAction(BluetoothDevice.ActionBondStateChanged);
-				RegisterReceiver(_receiver, intentFilter);
-			}
-
-			_bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
-			if (_bluetoothAdapter != null)
-				_bluetoothAdapter.StartDiscovery();
 
 		}
 
@@ -111,11 +86,33 @@ namespace HoneywellRfidNative
 			_context = this;
 			
 			_rfidManager = HoneywellDeviceHub.GetInstance().RfidMgr;
+			_bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
+			//SetSelectedDev(null);
+			//Disconnect();
 
-			SetSelectedDev(null);
+			_btReceiver = new BtReceiver();
+			IntentFilter filter = new IntentFilter();
+			filter.AddAction("android.bluetooth.adapter.action.STATE_CHANGED");
+			RegisterReceiver(_btReceiver, filter);
 
-			Disconnect();
+			_receiver = new BtBroadcastReceiver();
+			RegisterReceiver(_receiver, new IntentFilter(BluetoothDevice.ActionFound));
 
+		}
+
+		private void _receiver_DeviceReceived(object sender, EventArgs e)
+		{
+			var newBTDevice = sender as BluetoothDevice;
+			if (newBTDevice.Address == mac1 || newBTDevice.Address == mac2)
+			{
+				btRfidScannerDevice = newBTDevice;
+				btnInit.Enabled = true;
+			}
+		}
+
+		private void _btReceiver_OnBtStateChange(object sender, Events.BtStateChangedEventArgs e)
+		{
+			btnScanTags.Enabled = false;
 		}
 
 		private void RequestDynamicPermissions()
@@ -141,10 +138,9 @@ namespace HoneywellRfidNative
 
 		private void Disconnect()
 		{
-			//btnScanTags.Enabled = false;
+			btnScanTags.Enabled = false;
 			_rfidManager.Disconnect();
 		}
-
 
 		private void Connect(string mac)
 		{
@@ -169,23 +165,36 @@ namespace HoneywellRfidNative
 
 		protected override void OnResume()
 		{
+
 			base.OnResume();
 
 			_rfidManager.DeviceConnected += RfidMgr_DeviceConnected;
 			_rfidManager.DeviceDisconnected += RfidMgr_DeviceDisconnected;
 			_rfidManager.ReaderCreated += RfidMgr_ReaderCreated;
 
-			//btnScanTags.Enabled = IsConnected();
+			if (_btReceiver != null)
+				_btReceiver.OnBtStateChange += _btReceiver_OnBtStateChange;
+
+			if (_receiver != null)
+				_receiver.DeviceReceived += _receiver_DeviceReceived;
 
 		}
 
 		protected override void OnPause()
 		{
+
 			base.OnPause();
 
 			_rfidManager.DeviceConnected -= RfidMgr_DeviceConnected;
 			_rfidManager.DeviceDisconnected -= RfidMgr_DeviceDisconnected;
 			_rfidManager.ReaderCreated -= RfidMgr_ReaderCreated;
+
+			if (_btReceiver != null)
+				_btReceiver.OnBtStateChange -= _btReceiver_OnBtStateChange;
+
+			if (_receiver != null)
+				_receiver.DeviceReceived -= _receiver_DeviceReceived;
+
 		}
 
 		private void RfidMgr_DeviceConnected(object sender, DeviceConnectedEventArgs e)
@@ -211,6 +220,14 @@ namespace HoneywellRfidNative
 			}
 		}
 
+		private void BtnBTScan_Click(object sender, EventArgs e)
+		{
+
+			if (_bluetoothAdapter != null)
+				_bluetoothAdapter.StartDiscovery();
+
+		}
+
 		private void BtnInit_Click(object sender, EventArgs e)
 		{
 
@@ -227,28 +244,33 @@ namespace HoneywellRfidNative
 
 			}
 
-			Thread.Sleep(2000);
+			ConnectionState connState = GetConnectionState();
 
-			bool isConnected = IsConnected();
-			if (isConnected)
-			{
-				_rfidManager.CreateReader();
-			}
-
-			//btnScanTags.Enabled = true;
+			btnScanTags.Enabled = true;
 
 		}
 
 		private void BtnScanTags_Click(object sender, EventArgs e)
 		{
 
-			//if (IsConnected() && GetSelectedDev() != null)
-			//{
-
-				Intent intent = new Intent(this, typeof(RfIdReaderActivity));
-				StartActivity(intent);
-
-			//}
+			ConnectionState connState = GetConnectionState();
+			if (connState == ConnectionState.StateConnected)
+			{
+				try
+				{
+					_rfidManager.CreateReader();
+					//Intent intent = new Intent(this, typeof(RfIdReaderActivity));
+					//StartActivity(intent);
+				}
+				catch (Exception ex)
+				{
+					var testerr = ex.Message;
+				}
+			}
+			else
+			{
+				Toast.MakeText(this, $"Connection state: {connState}", ToastLength.Short).Show();
+			}
 
 		}
 
