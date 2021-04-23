@@ -24,7 +24,7 @@ using static Android.Views.View;
 
 namespace HoneywellRfidNative
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity, IOnClickListener, AdapterView.IOnItemClickListener
     {
         private BleScanCallBack _leScanCallback;
@@ -346,6 +346,8 @@ namespace HoneywellRfidNative
             {
                 HoneywellDeviceHub.GetInstance().RfIdRdr = e.Reader;
                 _connectionHandler.SendEmptyMessage(BleMsgConsts.MSG_CREATE_READER_SUCCESSFULLY);
+                SetAntennaPower(2100, 2100);
+                var antPower = e.Reader.GetAntennaPower();
                 Intent intent = new Intent(this, typeof(RfIdReaderActivity));
                 StartActivity(intent);
             }
@@ -354,5 +356,14 @@ namespace HoneywellRfidNative
                 _connectionHandler.SendEmptyMessage(BleMsgConsts.MSG_CREATE_READER_FAILED);
             }
         }
+
+        private void SetAntennaPower(int readPower, int writePower)
+        {
+            Com.Honeywell.Rfidservice.Rfid.AntennaPower[] attenas = new Com.Honeywell.Rfidservice.Rfid.AntennaPower[1];
+            Com.Honeywell.Rfidservice.Rfid.AntennaPower antenna = new Com.Honeywell.Rfidservice.Rfid.AntennaPower(1, readPower, writePower);
+            attenas[0] = antenna;
+            HoneywellDeviceHub.GetInstance().RfIdRdr.SetAntennaPower(attenas);
+        }
+
     }
 }

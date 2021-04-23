@@ -25,7 +25,7 @@ using static Android.Views.View;
 namespace HoneywellRfidNative
 {
 
-	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
 	public class TestActivity1 : AppCompatActivity
 	{
 
@@ -100,56 +100,56 @@ namespace HoneywellRfidNative
 
 		}
 
-		public void HandleMessage(Android.OS.Message msg)
-		{
-			switch (msg.What)
-			{
-				case BleMsgConsts.MSG_FINDING_BLE_SERVICES:
-					//_progressDialog.SetTitle("Finding Devices");
-					//_progressDialog.Show();
-					break;
-				case BleMsgConsts.MSG_CREATING_READER:
-					//_progressDialog.SetTitle("Creating Reader");
-					//_progressDialog.Show();
-					break;
-				case BleMsgConsts.MSG_CREATE_READER_SUCCESSFULLY:
-					//_progressDialog.Dismiss();
-					Toast.MakeText(this, "Created Reader", ToastLength.Short).Show();
-					break;
-				case BleMsgConsts.MSG_CREATE_READER_FAILED:
-					//_progressDialog.Dismiss();
-					Toast.MakeText(this, "Reader Failed", ToastLength.Short).Show();
-					break;
-				case BleMsgConsts.MSG_BT_SCAN_TIMEOUT:
-					//SearchTimeout();
-					break;
-				case BleMsgConsts.MSG_ON_BLE_DEV_FOUND:
-					//int rssi = msg.Arg1;
-					//BluetoothDevice device = (BluetoothDevice)msg.Obj;
+		//public void HandleMessage(Android.OS.Message msg)
+		//{
+		//	switch (msg.What)
+		//	{
+		//		case BleMsgConsts.MSG_FINDING_BLE_SERVICES:
+		//			//_progressDialog.SetTitle("Finding Devices");
+		//			//_progressDialog.Show();
+		//			break;
+		//		case BleMsgConsts.MSG_CREATING_READER:
+		//			//_progressDialog.SetTitle("Creating Reader");
+		//			//_progressDialog.Show();
+		//			break;
+		//		case BleMsgConsts.MSG_CREATE_READER_SUCCESSFULLY:
+		//			//_progressDialog.Dismiss();
+		//			Toast.MakeText(this, "Created Reader", ToastLength.Short).Show();
+		//			break;
+		//		case BleMsgConsts.MSG_CREATE_READER_FAILED:
+		//			//_progressDialog.Dismiss();
+		//			Toast.MakeText(this, "Reader Failed", ToastLength.Short).Show();
+		//			break;
+		//		case BleMsgConsts.MSG_BT_SCAN_TIMEOUT:
+		//			//SearchTimeout();
+		//			break;
+		//		case BleMsgConsts.MSG_ON_BLE_DEV_FOUND:
+		//			//int rssi = msg.Arg1;
+		//			//BluetoothDevice device = (BluetoothDevice)msg.Obj;
 
-					//if (!_bleScanDevices.Any(x => x.Address == device.Address))
-					//{
-					//	_bleScanDevices.Add(device);
-					//	_bleScanListAdapter.NotifyDataSetChanged();
-					//}
+		//			//if (!_bleScanDevices.Any(x => x.Address == device.Address))
+		//			//{
+		//			//	_bleScanDevices.Add(device);
+		//			//	_bleScanListAdapter.NotifyDataSetChanged();
+		//			//}
 
-					//_bleScanDevicesRssi[device.Address] = rssi;
+		//			//_bleScanDevicesRssi[device.Address] = rssi;
 
-					//DateTime cur = DateTime.Now;
+		//			//DateTime cur = DateTime.Now;
 
-					//var diffTime = cur - _prevListUpdateTime;
+		//			//var diffTime = cur - _prevListUpdateTime;
 
-					//if (diffTime.TotalMilliseconds > 250)
-					//{
-					//	_bleScanListAdapter.NotifyDataSetChanged();
-					//	_prevListUpdateTime = cur;
-					//}
-					break;
-				case BleMsgConsts.MSG_DEALY_CREATE_READER:
-					//_accessReadBtn.Enabled = true;
-					break;
-			}
-		}
+		//			//if (diffTime.TotalMilliseconds > 250)
+		//			//{
+		//			//	_bleScanListAdapter.NotifyDataSetChanged();
+		//			//	_prevListUpdateTime = cur;
+		//			//}
+		//			break;
+		//		case BleMsgConsts.MSG_DEALY_CREATE_READER:
+		//			//_accessReadBtn.Enabled = true;
+		//			break;
+		//	}
+		//}
 
 		private void _receiver_DeviceReceived(object sender, EventArgs e)
 		{
@@ -267,10 +267,20 @@ namespace HoneywellRfidNative
 			if (e.Success)
 			{
 				HoneywellDeviceHub.GetInstance().RfIdRdr = e.Reader;
-				//_connectionHandler.SendEmptyMessage(BleMsgConsts.MSG_CREATE_READER_SUCCESSFULLY);
-				Intent intent = new Intent(this, typeof(RfIdReaderActivity));
-				StartActivity(intent);
+				SetAntennaPower(2100, 2100);
+				//HoneywellDeviceHub.GetInstance().RfIdRdr.SetAntennaPower(new Com.Honeywell.Rfidservice.Rfid.AntennaPower[0]);
+				var antPower = e.Reader.GetAntennaPower();
+				//Intent intent = new Intent(this, typeof(RfIdReaderActivity));
+				//StartActivity(intent);
 			}
+		}
+
+		private void SetAntennaPower(int readPower, int writePower)
+		{
+			Com.Honeywell.Rfidservice.Rfid.AntennaPower[] attenas = new Com.Honeywell.Rfidservice.Rfid.AntennaPower[1];
+			Com.Honeywell.Rfidservice.Rfid.AntennaPower antenna = new Com.Honeywell.Rfidservice.Rfid.AntennaPower(1, readPower, writePower);
+			attenas[0] = antenna;
+			HoneywellDeviceHub.GetInstance().RfIdRdr.SetAntennaPower(attenas);
 		}
 
 		private void BtnBTScan_Click(object sender, EventArgs e)
