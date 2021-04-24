@@ -11,6 +11,7 @@ namespace HoneywellRfidNative.Adapters
 {
     public class BluetoothDeviceListAdapter : BaseAdapter<BluetoothDevice>
     {
+
         private Color _colorDefault;
         private Color _colorConnected;
         private Color _colorDisconnected;
@@ -114,4 +115,5 @@ namespace HoneywellRfidNative.Adapters
         public TextView TvAddress { get; set; }
         public TextView TvRssi { get; set; }
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.App;
+using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -14,9 +15,11 @@ using Xamarin.Essentials;
 
 namespace HoneywellRfidNative
 {
+
     [Activity(Label = "RfIdReaderActivity")]
-    public class RfIdReaderActivity : Activity
+    public class RfIdReaderActivity : Activity, AdapterView.IOnItemClickListener
     {
+
         private ListView _rfidListview;
         private Button _rfidScanButton;
 
@@ -27,8 +30,11 @@ namespace HoneywellRfidNative
 
         private Dictionary<string, TagDisplayItem> _scannedTags = new Dictionary<string,TagDisplayItem>();
 
+        public static string SelectedEpc = string.Empty;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
             base.OnCreate(savedInstanceState);
 
             this.Window.SetFlags(WindowManagerFlags.KeepScreenOn, WindowManagerFlags.KeepScreenOn);
@@ -42,6 +48,26 @@ namespace HoneywellRfidNative
 
             _tagListAdapter = new RfidTagListAdapter(this, ref _scannedTags);
             _rfidListview.Adapter = _tagListAdapter;
+            _rfidListview.OnItemClickListener = this;
+
+        }
+
+        public void OnItemClick(AdapterView parent, View view, int position, long id)
+        {
+
+            ListView lv = (ListView)parent;
+            //BluetoothDevice device = (BluetoothDevice)lv.Adapter.GetItem(position);
+
+            var test = lv.Adapter.GetItem(position);
+            var propertyInfo = test.GetType().GetProperty("Instance");
+            var test2 = (propertyInfo.GetValue(test, null) as TagDisplayItem);
+
+            if (test2 != null)
+                SelectedEpc = test2.Epc;
+
+            view.SetBackgroundColor(Color.Yellow);
+            _tagListAdapter.NotifyDataSetChanged();
+
         }
 
         private void OnTagMessage(TagMessage message)
